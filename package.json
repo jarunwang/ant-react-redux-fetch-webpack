@@ -121,5 +121,5 @@
       "\\.(css|less|scss)$": "<rootDir>/src"
     }
   },
-  "homepage": ""
+  "homepage": "https://github.com/jarunwang/ant-react-redux-fetch-webpack.git"
 }
