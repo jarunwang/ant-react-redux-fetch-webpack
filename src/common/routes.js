@@ -9,9 +9,10 @@ const location = history.location
 
 const routes = (
    <Switch>
-     <Route exec path="/" component={Container} />
      <Route exec path="/login" component={Login} />
      {location.hash === '#/' ? <Redirect to='/login' /> : ''}
+     <Route exec path="/" component={Container} />
+    
    </Switch>
 )
 

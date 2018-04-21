@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Table, Icon, Divider, Button, Modal, Form, Row, Col, Input, InputNumber } from 'antd';
 import { addTest, editTest, delTest, serachTest } from 'actions/test';
 import './index.less';
-import { checkKey , filterList} from '../../utils/util';
+import { checkKey, filterList } from '../../utils/util';
+import Search from 'components/search';
 
 const { Column, ColumnGroup } = Table;
 const FormItem = Form.Item;
@@ -12,132 +13,35 @@ const { TextArea } = Input;
 
 const searchConfig = [
     {
-        type : "text",
-        name : "name",
-        searchFilterType : "string",
-        defaultValue : "0000",
-        placeholder : "name",
+        type: "text",
+        name: "name",
+        searchFilterType: "string",
+        defaultValue: "",
+        placeholder: "name",
         /* rules: [{ required: true, message: 'Please input your name!' }], */
     },
     {
-        type : "textarea",
-        name : "address",
-        searchFilterType : "string",
-        extendAttr : () =>{{rows=1}}
+        type: "textarea",
+        name: "address",
+        searchFilterType: "string",
+        extendAttr: () => { { rows = 1 } }
     },
     {
-        type : "number",
-        name : "age",
-        searchFilterType : "number",
-        defaultValue : "2",
-        extendAttr : () => {{min=1,max=10}},
-        fun : () => {console.log("number")},
+        type: "number",
+        name: "age",
+        searchFilterType: "number",
+        defaultValue: "",
+        extendAttr: () => { { min = 1, max = 10 } },
+        fun: () => { console.log("number") },
     }
 ]
 
-const mapStateToProps = (state,action) => {
+const mapStateToProps = (state, action) => {
     return {
-        testList : filterList(state.testList,state.searchText),
-        searchText : state.searchText
-    }
-    
+        testList: filterList(state.testList, state.searchText),
+        searchText: state.searchText,
+    };
 };
-
-class SearchForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    handleSearch = (e) => {
-        e.preventDefault();
-        let self = this;
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log(values)
-                const data = {};
-                //this.props.config
-                for(var i in values){
-                    data[i] = {
-                        name : values[i],
-                        type : this.getType(i),
-                    }
-                }
-                self.props.onSubmit(data);
-            }
-        });
-    }
-    getType = (item) => {
-        for(let n = 0;n<this.props.config.length;n++){
-            if(this.props.config[n].name == item){
-                return this.props.config[n].searchFilterType;
-            }
-        }
-    }
-    handleReset = () => {
-        this.props.form.resetFields();
-    }
-    getChildren() {
-        const { getFieldDecorator } = this.props.form;
-        const children = [];
-        for (let i = 0; i < this.props.config.length; i++) {
-            children.push(
-                <Col span={8} key={i}>
-                    <FormItem label={this.props.config[i].name}>
-                        {getFieldDecorator(this.props.config[i].name, {
-                            rules: this.props.config[i].rules?this.props.config[i].rules:"",
-                        })(
-                            this.getInputType(this.props.config[i])
-                        )}
-                    </FormItem>
-                </Col>
-            );
-        }
-        return children;
-    }
-    getInputType(item){
-        let _attr = {
-            ...item.extendAttr,
-            type : item.searchFilterType,
-            placeholder : item.placeholder,
-            onChange : item.fun
-        }
-
-        switch (item.type) {
-            case "text":
-                return <Input {..._attr} />;
-            case "number":
-                return <InputNumber {..._attr} />;
-            case "textarea":
-                return <TextArea {..._attr}/>
-            default:
-                break;
-        }
-    }
-    componentDidMount () {
-        let setData = {};
-        this.props.config.map(i=>{
-            setData[i.name] = i.defaultValue;
-        });
-        this.props.form.setFieldsValue(setData);
-    }
-    render() {
-        return (
-            <Form
-                className="ant-advanced-search-form"
-                onSubmit={this.handleSearch}
-            >
-                <Row gutter={24}>{this.getChildren()}</Row>
-                <Row>
-                    <Col span={24} style={{ textAlign: 'right' }}>
-                        <Button type="primary" htmlType="submit">Search</Button>
-                        <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>Clear</Button>
-                    </Col>
-                </Row>
-            </Form>
-        )
-    }
-}
-const Search = Form.create()(SearchForm);
-
 
 @connect(mapStateToProps)
 class TestForm extends React.Component {
@@ -148,12 +52,12 @@ class TestForm extends React.Component {
             age: "",
             address: "",
             id: "",
-            key: ""
+            key: "",
         }
 
         this.state = {
             visible: false,
-            ...this.dialogValue
+            ...this.dialogValue,
         }
     }
     handleAdd = () => {
@@ -184,7 +88,7 @@ class TestForm extends React.Component {
     handleEdit = (e) => {
         e.preventDefault();
         this.setState({ visible: true });
-        this.dialogSetValue(this.props.testList.filter(t => t.id == e.target.id))
+        this.dialogSetValue(this.props.testList.filter(t => t.id == e.target.id));
     }
     dialogOk = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -193,18 +97,16 @@ class TestForm extends React.Component {
                     data = {
                         name: values.name,
                         age: values.age,
-                        address: values.address
+                        address: values.address,
                     }
                 if (id) {
                     data.id = id;
                     data.type = "EDIT_TEST";
-
                     this.props.dispatch(editTest(data));
                 } else {
                     const last = this.props.testList[this.props.testList.length - 1];
                     data.id = last ? parseInt(last.id, 10) + 1 : 0;
                     data.type = "ADD_TEST";
-
                     this.props.dispatch(addTest(data));
                 }
                 this.setState({ visible: false });
@@ -218,53 +120,59 @@ class TestForm extends React.Component {
     dialogCancel = () => {
         this.setState({ visible: false });
     }
+    getModal = () => {
+        const { getFieldDecorator } = this.props.form;
+        const colStyle = {
+            labelCol: { span: 6 },
+            wrapperCol: { span: 16 },
+        }
+        return (
+        <Modal title="Dialog" visible={this.state.visible} onOk={this.dialogOk} onCancel={this.dialogCancel}>
+            <Form layout="horizontal">
+                <FormItem label="name" {...colStyle}>
+                    {getFieldDecorator('name', {
+                        rules: [{ required: true, message: 'Please input your name!' }],
+                    })(
+                        <Input placeholder="name" />
+                    )}
+                </FormItem>
+                <FormItem label="age" {...colStyle}>
+                    {getFieldDecorator('age', {
+                        rules: [{ required: true, message: 'Please input your age!' }],
+                    })(
+                        <InputNumber min={1} max={100} placeholder="1" />
+                    )}
+                </FormItem>
+                <FormItem label="address" {...colStyle}>
+                    {getFieldDecorator('address', {
+                        rules: [{ required: true, message: 'Please input your address!' }],
+                    })(
+                        <TextArea placeholder="address" autosize />
+                    )}
+                </FormItem>
+                {getFieldDecorator('id')
+                    (
+                    <Input type="hidden" />
+                    )}
+                {getFieldDecorator('key')
+                    (
+                    <Input type="hidden" />
+                    )}
+            </Form>
+        </Modal>)
+    }
     onSearch = (searchFields) => {
         searchFields.type = "SEARCH_TEST";
         this.props.dispatch(serachTest(searchFields));
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const colStyle = {
-            labelCol: { span: 6 },
-            wrapperCol: { span: 16 }
-        }
         return (
             <div>
-                <Search onSubmit={this.onSearch} config={searchConfig}/>
-                <Modal title="Basic Modal" visible={this.state.visible} onOk={this.dialogOk} onCancel={this.dialogCancel}>
-                    <Form layout="horizontal">
-                        <FormItem label="name" {...colStyle}>
-                            {getFieldDecorator('name', {
-                                rules: [{ required: true, message: 'Please input your name!' }],
-                            })(
-                                <Input placeholder="name" />
-                            )}
-                        </FormItem>
-                        <FormItem label="age" {...colStyle}>
-                            {getFieldDecorator('age', {
-                                rules: [{ required: true, message: 'Please input your age!' }],
-                            })(
-                                <InputNumber min={1} max={100} placeholder="1" />
-                            )}
-                        </FormItem>
-                        <FormItem label="address" {...colStyle}>
-                            {getFieldDecorator('address', {
-                                rules: [{ required: true, message: 'Please input your address!' }],
-                            })(
-                                <TextArea placeholder="address" autosize />
-                            )}
-                        </FormItem>
-                        {getFieldDecorator('id')
-                            (
-                            <Input type="hidden" />
-                            )}
-                        {getFieldDecorator('key')
-                            (
-                            <Input type="hidden" />
-                            )}
-                    </Form>
-                </Modal>
-                <Button className="editable-add-btn" onClick={this.handleAdd}>Add</Button>
+                <Search onSubmit={this.onSearch} config={searchConfig} />
+                {this.getModal()}
+                <div className="table-operations">
+                    <Button onClick={this.handleAdd}>Add</Button>
+                </div>
                 <Table dataSource={checkKey(this.props.testList)}>
                     <Column
                         title="name"
@@ -299,5 +207,4 @@ class TestForm extends React.Component {
 }
 
 const Test = Form.create()(TestForm);
-
 export default Test;

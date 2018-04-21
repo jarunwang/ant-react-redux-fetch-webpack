@@ -64,11 +64,12 @@ const setSeachInit = {
 
 export const searchText = handleActions({
   'SEARCH_TEST'(state, action){
-    console.log(action)
     return {
-            name : {value: action.payload.name,type: action.payload.type},
-            age : {value: action.payload.age,type: action.payload.type},
-            address : {value: action.payload.address,type: action.payload.type},
-          };
-  } 
-},setSeachInit)
+      name : {value: action.payload.name.value,
+              type: action.payload.name.type},
+      age :  {value: action.payload.age.value,
+              type: action.payload.age.type},
+      address : {value: action.payload.address.value,
+                 type: action.payload.address.type},
+    }
+}},setSeachInit)

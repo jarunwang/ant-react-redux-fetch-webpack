@@ -1,5 +1,5 @@
 {
-  "name": "reactSPA",
+  "name": "ant-react-redux-fetch-webpack",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -121,5 +121,5 @@
       "\\.(css|less|scss)$": "<rootDir>/src"
     }
   },
-  "homepage": "http://MuYunyun.github.io/reactSPA"
+  "homepage": ""
 }

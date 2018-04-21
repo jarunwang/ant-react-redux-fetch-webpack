@@ -94,6 +94,7 @@ yarn deploy
 │   │   │   ├── index.js       通用工具
 │   │   │   ├── config.js      通用配置
 │   │   │   ├── menu.js        菜单配置
+│   │   │   ├── util.js        公用工具
 │   │   │   └── ajax.js        ajax模块
 │   │   └── routes.js          前端路由
 │   └── server                 服务端目录(日后用到)

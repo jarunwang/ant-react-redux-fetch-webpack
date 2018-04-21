@@ -18,7 +18,7 @@ export default class Container extends React.Component {
     mode: 'inline',  // 水平垂直展现
   }
   componentDidMount() {
-    this.handleClick([], 'index')
+    this.handleClick([], window.location.href.split("#/")[1]?window.location.href.split("#/")[1]:'index')
   }
   changeTheme = (value) => {
     this.setState({
@@ -65,7 +65,7 @@ export default class Container extends React.Component {
               allMenu.map((subMenu) => {
                 if (subMenu.children && subMenu.children.length) {
                   return (
-                    <SubMenu key={subMenu.url} title={<span><Icon type={subMenu.icon} /><span>{subMenu.name}</span></span>}>
+                    <SubMenu selectable={true} key={subMenu.url} title={<span><Icon type={subMenu.icon} /><span>{subMenu.name}</span></span>}>
                       {subMenu.children.map(menu => (
                         <Menu.Item key={menu.url}><Link to={`/${menu.url}`}>{menu.name}</Link></Menu.Item>
                       ))}

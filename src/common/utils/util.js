@@ -1,3 +1,8 @@
+
+String.prototype.trim=function(){
+　　return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+
 export function checkKey(list) {
     let items = list;
 
@@ -49,17 +54,32 @@ export const checkType = {
 	},
 	isFunction : function(arg){
 		return Object.prototype.toString.call(arg) === '[object Function]';
-	}
+    },
+    isEmpty: function(s) {
+       if(typeof(s) == "undefined" || s == null || s == "" || s.toString().trim() == "") {
+			return true;
+		} else {
+			return false;
+		}
+	},
 }
 
 export function filterList(list,filterKey){
-    // let _filterList = list;
-    // for(var key in filterKey){
-    //      if(filterKey[key]&&filterKey[key]!=undefined){
-    //         _filterList.push(list.filter((i)=>{i[key]==filterKey[key]}));
-    //      }else{
-    //         _filterList = list;
-    //      }
-    // }
-    return list
+    let _filterList = list;
+    for(var key in filterKey){
+         let item = filterKey[key];
+         if(item&&!checkType.isEmpty(item.value)){
+            _filterList =  _filterList.filter((n)=>{
+                switch (item.type){
+                    case "string":
+                        return n[key].indexOf(item.value)>=0;
+                    case "number":
+                        return n[key]==item.value;
+                    default:
+                        break;
+                }
+            });
+         }
+    }
+    return _filterList;
 }
