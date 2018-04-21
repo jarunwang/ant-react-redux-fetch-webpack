@@ -12,7 +12,7 @@ import Editor from 'pages/editor'
 import TodoList from 'pages/todoList'
 import Search from 'pages/search'
 import Waterfall from 'pages/waterfall'
-import ListView from 'pages/listView'
+import Test from 'pages/test'
 
 const { Content } = Layout
 
@@ -30,7 +30,7 @@ export default class Contents extends React.Component {
         <Route path="/todoList" component={TodoList} />
         <Route path="/searchEngine" component={Search} />
         <Route path="/waterfall" component={Waterfall} />
-        <Route path="/listView" component={ListView} />
+        <Route path="/test" component={Test} />
       </Content>
     )
   }

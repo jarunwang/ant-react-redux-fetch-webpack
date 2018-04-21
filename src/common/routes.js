@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Redirect, Switch } from 'react-router'
 import Container from 'container'
 import Login from 'pages/login'
-import ListView from 'pages/listView'
 import createHistory from 'history/createBrowserHistory'
 
 const history = createHistory()

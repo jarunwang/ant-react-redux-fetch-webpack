@@ -46,7 +46,7 @@ export const allMenu = [
     url: 'follow',
     icon: 'heart-o',
   },{
-    name: '列表页面',
-    url: 'listView',
+    name: '测试页面',
+    url: 'test',
     icon: 'heart-o',
   }]
