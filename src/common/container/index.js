@@ -50,8 +50,8 @@ export default class Container extends React.Component {
           onCollapse={this.onCollapse}
           className="leftMenu"
         >
-          {this.state.theme === 'light' ? <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github" /></a> :
-            <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github white" /></a> }
+          {this.state.theme === 'light' ? <a href="https://github.com/jarunwang/ant-react-redux-fetch-webpack.git" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github" /></a> :
+            <a href="https://github.com/jarunwang/ant-react-redux-fetch-webpack.git" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github white" /></a> }
           { this.state.theme === 'light' ? <span className="author">QZ</span> : <span className="author white">QZ</span> }
           <Menu
             theme={this.state.theme}

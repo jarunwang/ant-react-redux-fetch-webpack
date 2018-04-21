@@ -1,15 +1,10 @@
-![Build Status](https://travis-ci.org/MuYunyun/reactSPA.svg?branch=master) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)
 ### Target
 
 > React 全家桶的综合运用.该项目会把日常开发中
 遇到的案例抽离成 demo 展现出来，同时会对一些知识点进行实践。
 
-[效果展示](https://muyunyun.github.io/reactSPA)，项目变大后，gitpage 上访问速度会比较慢(几十秒)，建议本地打开
+[效果展示](https://github.com/jarunwang/ant-react-redux-fetch-webpack)，项目变大后，gitpage 上访问速度会比较慢(几十秒)，建议本地打开
 
-* 部分模块展示：
-![](http://files.cnblogs.com/files/MuYunyun/reactSPA.gif)
-* redux 在项目中的运用 demo 展示
-![](http://files.cnblogs.com/files/MuYunyun/todoList.gif)
 
 ### Usage
 ```
@@ -37,30 +32,16 @@ yarn deploy
 - [x] Ajax：Fetch
 - [x] 跨域: 基于 CORS 实现
 - [x] 代码校验: Eslint
-- [ ] 性能优化: [analyze-webpack-plugin](https://github.com/MuYunyun/analyze-webpack-plugin)
+- [ ] 性能优化: [analyze-webpack-plugin]
 - [ ] 测试用例：jest
-- [ ] 网关层：使用 typescript + node.js，可参考 [gateway](https://github.com/MuYunyun/gateway)
+- [ ] 网关层：使用 typescript + node.js
 
 ### Document
 
-结合该项目分析过的文章(技术栈以项目中的为准)
-
-* [使用 React 全家桶搭建一个后台管理系统](http://muyunyun.cn/posts/9bfbdbf4/)
-
-* [redux middleware 源码分析](http://muyunyun.cn/posts/7f9a92dc/)
-
 ### Features
-* 音乐模块
-  * 抽离了 Ajax 模块，可完成相应的跨域需求
+* 列表模块
+  * 实现里面增删改查
   * redux 流实现数据的获取
-* 工具模块
-  * 实现对工资、房租、身体指数、年龄的智能计算
-  * 富文本编辑器应用
-  * 用 redux 实现了待办事项模块
-* 画廊模块
-  * 图片瀑布流(撸了个插件 [jswaterfall](https://github.com/MuYunyun/waterfall))
-* 搜索模块
-  * 搜索引擎的实现(集合了百度、360、搜狗搜索)
 * 更多模块开发中
   * 欢迎 issue || pr
 

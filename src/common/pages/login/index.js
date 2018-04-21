@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
         return (
             <div className="loginpagewrap">
                 <div className="box">
-                    <p>Welcome to the ReactSPA</p>
+                    <p>Welcome to the Login</p>
                     <div className="loginWrap">
                         <Form onSubmit={this.handleSubmit}>
                             <FormItem>

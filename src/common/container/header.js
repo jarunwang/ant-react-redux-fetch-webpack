@@ -21,7 +21,7 @@ export default class Top extends React.Component {
 
     getUser = () => {
         this.setState({
-            username: 'Muyy'
+            username: 'QZ'
         })
     }
 
