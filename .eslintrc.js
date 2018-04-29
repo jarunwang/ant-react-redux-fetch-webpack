@@ -20,7 +20,7 @@ module.exports = {
   },
   "rules": {
     "indent": 0,
-    "semi": ["error", "never"],
+    // "semi": ["error", "never"],
     "react/prop-types": ["ignore"], // 干掉 react-prop，日后再补~
     "react/display-name": ["ignore"],
   },
